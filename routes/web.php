@@ -21,6 +21,11 @@ Route::middleware(['auth'])->group(function () {
 	// Redirect to home page chosen by the admin (TODO)
 	Route::redirect('/', RouteServiceProvider::HOME);
 
+	// Discussions
+	Route::prefix('discussions')->group(function () {
+		Route::get('/', 'DiscussionController@index');
+	});
+
 	// Events
 	Route::prefix('events')->group(function () {
 		Route::get('/', 'EventController@upcoming');
@@ -34,6 +39,16 @@ Route::middleware(['auth'])->group(function () {
 	Route::prefix('adherents')->group(function () {
 	    Route::get('/', 'AdherentController@index');
 	    Route::get('/{id}', 'AdherentController@show');   
+	});
+
+	// Photos
+	Route::prefix('photos')->group(function () {
+		Route::get('/', 'PhotoController@index');
+	});
+
+	// Files
+	Route::prefix('files')->group(function () {
+		Route::get('/', 'FileController@index');
 	});
 
 	// Settings

@@ -635,15 +635,9 @@ video {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 960px) {
   .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
+    max-width: 960px;
   }
 }
 
@@ -33013,7 +33007,7 @@ video {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 960px) {
   .lg\:sr-only {
     position: absolute;
     width: 1px;
@@ -43789,7 +43783,7 @@ video {
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 960px) {
   .xl\:sr-only {
     position: absolute;
     width: 1px;

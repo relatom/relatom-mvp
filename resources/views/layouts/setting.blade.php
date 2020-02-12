@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Relatom') }}</title>
 
     <!-- Styles -->
-    <!-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> -->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <header>

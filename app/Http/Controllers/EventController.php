@@ -20,13 +20,38 @@ class EventController extends Controller
 
         $events = Event::where('start_at', '>=', now())
             ->orderBy('start_at', 'asc')
-            ->get();
+            ->get()
+            ->groupBy(function ($val) {
+                return date("m", strtotime($val->start_at));
+            });
+ 
+        $current_month = date("m", strtotime("first day of this month"));
 
-        $week = $events->where('start_at', '<', date("Y-m-d H:i:s", strtotime('next monday')))->all();
+        $week = $events[$current_month]
+            ->where('start_at', '<', date("Y-m-d H:i:s", strtotime('next monday')))
+            ->groupBy(function ($val) {
+                return date("Y-m-d", strtotime($val->start_at));
+            })
+            ->all();
 
-        $month = $events->whereBetween('start_at', [date("Y-m-d H:i:s", strtotime('next monday')), date("Y-m-d H:i:s", strtotime('next month'))])->all();
+        $timestamp = strtotime('now');
+        $days = array();
+        for ($i = 0; $i < 7; $i++) {
+            $days[date("Y-m-d", $timestamp)] = [];
+            $timestamp = strtotime('+1 day', $timestamp);
+        }
 
-        $after = $events->where('start_at', '>', date("Y-m-d H:i:s", strtotime('next month')))->all();
+        //$week =  $week + $days;
+
+        //ksort($week);
+
+        $month = $events[$current_month]
+            ->whereBetween('start_at', [date("Y-m-d H:i:s", strtotime('next monday')), date("Y-m-d H:i:s", strtotime('next month'))])
+            ->all();
+
+        unset($events[$current_month]);
+
+        $after = $events;
 
         return view('events.upcoming', ['week' => $week, 'month' => $month, 'after' => $after]);
     }

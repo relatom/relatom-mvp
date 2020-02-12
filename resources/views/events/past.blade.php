@@ -2,11 +2,13 @@
 
 @section('content') 
     <section>
-        <header>
-            <h1>Évènements à passées</h1>
-            <ul>
-                <li><a href="/events">Upcoming</a></li>
-                <li><a href="/events/past">Past</a></li>
+         <header class="pb-4">
+            <h1 class="text-xl font-semibold pb-4">Évènements</h1>
+            <ul class="flex border-solid border-b mb-4">
+                <li class="mr-6 pb-2">
+                    <a href="/events">Upcoming</a></li>
+                <li class="mr-6 pb-2 border-solid border-b-2 border-gray-700">
+                    <a href="/events/past">Past</a></li>
             </ul> 
         </header>
         <section>
