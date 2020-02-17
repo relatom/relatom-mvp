@@ -20,6 +20,22 @@
  */
 @tailwind components;
 
+.tab--nav--active {
+	@apply border-solid border-b-2 border-blue-800;
+}
+
+.cards {
+	@apply bg-white border-solid border rounded mb-4;
+}
+
+.cards--header {
+	@apply border-b p-4 pt-2 pb-2;
+}
+
+.nav--active {
+	@apply bg-gray-100 rounded border font-medium;
+}
+
 /**
  * Here you would add any of your custom component classes; stuff that you'd
  * want loaded *before* the utilities so that the utilities could still

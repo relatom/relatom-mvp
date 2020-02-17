@@ -18,42 +18,14 @@ class EventController extends Controller
     public function upcoming()
     {
 
-        $events = Event::where('start_at', '>=', now())
+        $days = Event::where('start_at', '>=', now())
             ->orderBy('start_at', 'asc')
             ->get()
             ->groupBy(function ($val) {
-                return date("m", strtotime($val->start_at));
-            });
- 
-        $current_month = date("m", strtotime("first day of this month"));
-
-        $week = $events[$current_month]
-            ->where('start_at', '<', date("Y-m-d H:i:s", strtotime('next monday')))
-            ->groupBy(function ($val) {
                 return date("Y-m-d", strtotime($val->start_at));
-            })
-            ->all();
+            });
 
-        $timestamp = strtotime('now');
-        $days = array();
-        for ($i = 0; $i < 7; $i++) {
-            $days[date("Y-m-d", $timestamp)] = [];
-            $timestamp = strtotime('+1 day', $timestamp);
-        }
-
-        //$week =  $week + $days;
-
-        //ksort($week);
-
-        $month = $events[$current_month]
-            ->whereBetween('start_at', [date("Y-m-d H:i:s", strtotime('next monday')), date("Y-m-d H:i:s", strtotime('next month'))])
-            ->all();
-
-        unset($events[$current_month]);
-
-        $after = $events;
-
-        return view('events.upcoming', ['week' => $week, 'month' => $month, 'after' => $after]);
+        return view('events.index', ['type' => 'upcoming', 'days' => $days]);
     }
 
      /**
@@ -64,11 +36,14 @@ class EventController extends Controller
     public function past()
     {
 
-        $events = Event::where('start_at', '<', now())
+        $days = Event::where('start_at', '<', now())
             ->orderBy('start_at', 'desc')
-            ->get();
+            ->get()
+            ->groupBy(function ($val) {
+                return date("Y-m-d", strtotime($val->start_at));
+            });
 
-        return view('events.past', ['events' => $events]);
+        return view('events.index', ['type' => 'past', 'days' => $days]);
     }
 
 

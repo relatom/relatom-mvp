@@ -21,14 +21,16 @@ Route::middleware(['auth'])->group(function () {
 	// Redirect to home page chosen by the admin (TODO)
 	Route::redirect('/', RouteServiceProvider::HOME);
 
+	Route::get('/about', 'PageController@about')->name('about');
+
 	// Discussions
-	Route::prefix('discussions')->group(function () {
-		Route::get('/', 'DiscussionController@index');
+	Route::prefix('discussions')->name('discussions.')->group(function () {
+		Route::get('/', 'PageController@discussion');
 	});
 
 	// Events
-	Route::prefix('events')->group(function () {
-		Route::get('/', 'EventController@upcoming');
+	Route::prefix('events')->name('events.')->group(function () {
+		Route::get('/', 'EventController@upcoming')->name('index');
 		Route::get('/past', 'EventController@past');
 		Route::get('/{id}', 'EventController@show');
 		Route::post('/{id}/participations', 'EventController@saveParticipations');
@@ -36,19 +38,19 @@ Route::middleware(['auth'])->group(function () {
 	});
 	
 	// Adherents
-	Route::prefix('adherents')->group(function () {
+	Route::prefix('adherents')->name('adherents.')->group(function () {
 	    Route::get('/', 'AdherentController@index');
 	    Route::get('/{id}', 'AdherentController@show');   
 	});
 
 	// Photos
-	Route::prefix('photos')->group(function () {
-		Route::get('/', 'PhotoController@index');
+	Route::prefix('photos')->name('photos.')->group(function () {
+		Route::get('/', 'PageController@photo');
 	});
 
 	// Files
-	Route::prefix('files')->group(function () {
-		Route::get('/', 'FileController@index');
+	Route::prefix('files')->name('files.')->group(function () {
+		Route::get('/', 'PageController@file');
 	});
 
 	// Settings

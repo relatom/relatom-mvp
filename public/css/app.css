@@ -641,6 +641,34 @@ video {
   }
 }
 
+.tab--nav--active {
+  border-style: solid;
+  border-bottom-width: 2px;
+  border-color: #2c5282;
+}
+
+.cards {
+  background-color: #fff;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.cards--header {
+  border-bottom-width: 1px;
+  padding: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.nav--active {
+  background-color: #f7fafc;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  font-weight: 500;
+}
+
 /**
  * Here you would add any of your custom component classes; stuff that you'd
  * want loaded *before* the utilities so that the utilities could still
