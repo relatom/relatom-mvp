@@ -45,36 +45,33 @@
     </div>
     <div class="flex justify-between cards p-4 pb-0 pt-3">
         <ul class="flex">
-            <li class="mr-6 pb-2 border-solid border-b-2 border-blue-800 ">
+            <li class="mr-6 pb-2">
                 <a href="{{ url('/events/' . $event->id) }}">Détails</a>
             </li>
-            <li class="mr-6 pb-2">
+            <li class="mr-6 border-solid border-b-2 border-blue-800">
                 <a href="{{ url('/events/' . $event->id . '/comments') }}">Discussions</a>
             </li>
         </ul> 
+    </div>             
+    <div class="cards  mb-5">
+        <form class="p-4" action="{{ url('/events/' . $event->id . '/comments') }}" method="POST">
+            {{ csrf_field() }}
+            <textarea class="w-full border rounded p-4 mb-2" rows="2" cols="50" name="message" placeholder="Ajouter votre commentaire..."></textarea>
+            <input type="submit" name="submit" value="Ajouter">
+        </form>   
     </div>
-    <div >
-        <section class="cards">
-            <h2 class="cards--header font-semibold">À propos</h2>
-            <p class="p-4">{!! $event->description !!}</p>
-        </section>
-        <section class="cards">
-            <header class="flex justify-between cards--header">
-                <h2 class="font-semibold">Participants</h2>
-                <a href="">Voir tous</a>
-            </header>
+    <section class="mt-2">
+        @forelse ($comments as $comment)
+        <article>
+            <p class="text-sm font-semibold pl-4 pb-3 text-gray-800"> Célestin Ballèvre à écrit à {{ $comment->updated_at }}</p>
+            <p class="cards p-4">{{ $comment->message }}</p>
             
-            @isset($participants)
-            <ul class="p-4">
-                @forelse ($participants as $participant)
-                <li><a href="{!! url('adherents/' . $participant->id); !!}">
-                    @component('components.display-adherent', ['adherent' => $participant])
-                    @endcomponent
-                </a></li>
-                @endforeach
-            </ul>
-            @endisset
-        </section>
-    </div>                       
+        </article>
+        @empty
+        <p>No comments</p>
+        @endforelse
+
+        
+    </section>        
 </article>
 @endsection

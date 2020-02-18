@@ -89,11 +89,68 @@ class EventController extends Controller
             }
         }
 
+        return view('events.show', [
+            'event' => $event,
+            'participants' => $participants, 
+            'auth_adherents' => $auth_adherents
+        ]);
+    }
+
+    /**
+     * Show all the participations 
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showParticipants($id)
+    {
+
+        $event = Event::findOrFail($id);
+        $participants = $event->participants;
+        $auth_adherents_participation = $event->participants()->where('user_id', Auth::id())->get();
+        $auth_adherents = Auth::user()->adherents;
+        foreach ($auth_adherents as $adherent) {
+            foreach ($auth_adherents_participation as $participant) {
+                if($adherent->id === $participant->id) {
+                    $adherent->is_participating = true;
+                }
+            }
+        }
+
         $comments = $event->comments;
 
         return view('events.show', [
             'event' => $event,
             'participants' => $participants, 
+            'comments' => $comments,
+            'auth_adherents' => $auth_adherents
+        ]);
+    }
+
+    /**
+     * Show discussions
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showComments($id)
+    {
+
+        $event = Event::findOrFail($id);
+        $auth_adherents_participation = $event->participants()->where('user_id', Auth::id())->get();
+        $auth_adherents = Auth::user()->adherents;
+        foreach ($auth_adherents as $adherent) {
+            foreach ($auth_adherents_participation as $participant) {
+                if($adherent->id === $participant->id) {
+                    $adherent->is_participating = true;
+                }
+            }
+        }
+
+        $comments = $event->comments;
+
+        return view('events.show-comments', [
+            'event' => $event,
             'comments' => $comments,
             'auth_adherents' => $auth_adherents
         ]);

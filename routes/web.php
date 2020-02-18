@@ -35,12 +35,13 @@ Route::middleware(['auth'])->group(function () {
 		Route::get('/{id}', 'EventController@show');
 		Route::post('/{id}/participations', 'EventController@saveParticipations');
 		Route::post('/{id}/comments', 'EventController@saveComments');
+		Route::get('/{id}/comments', 'EventController@showComments');
 	});
 	
 	// Adherents
 	Route::prefix('adherents')->name('adherents.')->group(function () {
 	    Route::get('/', 'AdherentController@index');
-	    Route::get('/{id}', 'AdherentController@show');   
+	    // Route::get('/{id}', 'AdherentController@show');   
 	});
 
 	// Photos

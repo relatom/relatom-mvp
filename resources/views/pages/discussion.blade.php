@@ -3,8 +3,10 @@
 @section('content') 
     <section>
         <header>
-            <h1>Discussions</h1>
+            <h1 class="text-xl font-semibold pb-4">Discussions</h1>
         </header>
-        <p>Pour le moment cette fonctionnalités n'est pas implémenté</p>
+        <div class="cards p-4">
+        	<p>Pour le moment cette fonctionnalités n'est pas implémenté</p>
+        </div>
     </section>
 @endsection

@@ -4,11 +4,6 @@
                 <a href="{{ url('/') }}">{{ config('app.name', 'Relatom') }}</a>
             </div>
             <div>
-                <form>
-                    <input class="search_input" type="text" name="" placeholder="Search...">
-                </form>
-            </div>
-            <div>
                 <ul class="flex">
                     @guest
                         <li class="mr-6">

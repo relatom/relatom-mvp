@@ -12,8 +12,6 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet"> 
 
-    <!-- Scripts temporary -->
-    <script src="https://kit.fontawesome.com/de1e190cd9.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-200">
 
@@ -36,11 +34,13 @@
 
         <div class="pt-20 lg:pt-24 lg:w-3/4 xl:w-4/5 p-4 ">
             @yield('content')
+
+            <hr>
+            
+            @include('partials.footer')
+
         </div> 
-
     </main>
-
-    @include('partials.footer')
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
