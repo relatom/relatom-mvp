@@ -3,7 +3,11 @@
 @section('content') 
     <section>
         <header class="mb-4">
-            <h1 class="text-xl font-semibold pb-4">Évènements</h1>
+            <div class="flex justify-between pb-4">
+                <h1 class="text-xl font-semibold">Évènements</h1>
+                <a href="#">Add a event</a>
+            </div>
+            
             <div class="flex justify-between cards p-4 pb-0 pt-3 shadow-xs">
                 <ul class="flex">
                     <li class="mr-6 pb-2 {{ $type === 'upcoming' ? 'tab--nav--active' : '' }}">
